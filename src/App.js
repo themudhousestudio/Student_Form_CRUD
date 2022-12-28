@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import AddStudent from "./components/AddStudent";
 import StudentList from "./components/StudentList";
 import StudentDetails from "./components/StudentDetails";
+import Inbox from "./components/Inbox";
 
 function App() {
   return (
@@ -20,13 +21,17 @@ function App() {
         <Link to="/addstudent" className="text-xl">
           Add
         </Link>
+        <Link to="/inbox" className="text-xl">
+          Inbox
+        </Link>
       </nav>
       <div className="mt-6">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/inbox" element={<Inbox />} />
           <Route path="/addstudent" element={<AddStudent />} />
           <Route path="/studentlist" element={<StudentList />} />
-          <Route path="/studentdetails:id" element={<StudentDetails />} />
+          <Route path="/studentdetails/:id" element={<StudentDetails />} />
         </Routes>
       </div>
     </div>

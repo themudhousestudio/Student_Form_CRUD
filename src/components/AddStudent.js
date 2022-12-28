@@ -1,14 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import {
-  addDoc,
-  collection,
-  setDoc,
-  deleteDoc,
-  doc,
-  query,
-  onSnapshot,
-} from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { firestore } from "../firebase_setup/firebase";
 import { v4 as uuidv4 } from "uuid";
 
@@ -17,6 +9,7 @@ const AddStudent = () => {
   const [name, setName] = useState("");
   const [father, setFather] = useState("");
   const [batch, setBatch] = useState("");
+  const [email, setEmail] = useState("");
 
   const submithandler = (e) => {
     e.preventDefault();
@@ -32,6 +25,7 @@ const AddStudent = () => {
       name: name,
       father: father,
       batch: batch,
+      email: email,
     };
     try {
       addDoc(ref, data);
@@ -42,53 +36,128 @@ const AddStudent = () => {
     setName("");
     setFather("");
     setBatch("");
+    setEmail("");
   };
 
   return (
     <>
-      <form onSubmit={submithandler}>
-        <div className="form-control mt-2">
-          <label>Student ID</label>
-          <input
-            type="text"
-            placeholder="Student ID"
-            value={studentID}
-            onChange={(e) => setStudentID(e.target.value)}
-          />
-        </div>
-        <div className="form-control mt-2">
-          <label>Name</label>
-          <input
-            type="text"
-            placeholder="Add Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="form-control mt-2">
-          <label>Father</label>
-          <input
-            type="text"
-            placeholder="Add Father"
-            value={father}
-            onChange={(e) => setFather(e.target.value)}
-          />
-        </div>
-        <div className="form-control mt-2">
-          <label>Batch</label>
-          <input
-            type="text"
-            placeholder="Add Father"
-            value={batch}
-            onChange={(e) => setBatch(e.target.value)}
-          />
-        </div>
-        <input
-          type="submit"
-          value="Save Student"
-          className="p-3 px-6 text-white bg-red-700 rounded-full mt-2 baseline"
-        />
-      </form>
+      <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto my-auto">
+        <form onSubmit={submithandler}>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-group mb-6">
+              <input
+                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700
+                        bg-white bg-clip-padding
+                        border border-solid border-gray-300
+                        rounded
+                        transition
+                        ease-in-out
+                        m-0
+                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                type="text"
+                placeholder="Student ID"
+                value={studentID}
+                onChange={(e) => setStudentID(e.target.value)}
+              />
+            </div>
+            <div className="form-group mb-6">
+              <input
+                type="text"
+                className="form-control block w-full px-3 py-1.5 text-base font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="form-group mb-6">
+            <input
+              type="text"
+              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Father Name"
+              value={father}
+              onChange={(e) => setFather(e.target.value)}
+            />
+          </div>
+          <div className="form-group mb-6">
+            <input
+              type="text"
+              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700
+                    bg-white bg-clip-padding
+                    border border-solid border-gray-300
+                    rounded
+                    transition
+                    ease-in-out
+                    m-0
+                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Batch"
+              value={batch}
+              onChange={(e) => setBatch(e.target.value)}
+            />
+          </div>
+          <div className="form-group mb-6">
+            <input
+              type="email"
+              className="form-control block
+            w-full
+            px-3
+            py-1.5
+            text-base
+            font-normal
+            text-gray-700
+            bg-white bg-clip-padding
+            border border-solid border-gray-300
+            rounded
+            transition
+            ease-in-out
+            m-0
+            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="
+          w-full
+          px-6
+          py-2.5
+          bg-blue-600
+          text-white
+          font-medium
+          text-xs
+          leading-tight
+          uppercase
+          rounded
+          shadow-md
+          hover:bg-blue-700 hover:shadow-lg
+          focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+          active:bg-blue-800 active:shadow-lg
+          transition
+          duration-150
+          ease-in-out"
+          >
+            Save Student
+          </button>
+        </form>
+      </div>
     </>
   );
 };
